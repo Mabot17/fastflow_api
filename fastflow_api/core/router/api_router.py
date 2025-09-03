@@ -13,12 +13,11 @@ from fastapi import APIRouter
 from core.modules.api_docs import api_docs_router, versi_router
 from core.modules.auth import login_router
 from core.modules.users.router import users_router
-from core.modules.master import (
+from core.modules.produk_barcode.router import (
     produk_barcode_router,
 )
 from core.modules.wablas import (
     wablas_router,
-    # wablas_netsales_router
 )
 
 from core.modules.text_to_voice import (

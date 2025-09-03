@@ -5,9 +5,9 @@
 from sqlalchemy.orm import Session, aliased
 from sqlalchemy import and_, func, or_
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
-from core.modules.master.produk_barcode.model.produk_barcode_model import ProdukBarcodeModel
+from core.modules.produk_barcode.model.produk_barcode_model import ProdukBarcodeModel
 from core.utils.common import SUCCESS, total_pages, start_from
-from core.modules.master.produk_barcode.schema.produk_barcode_schema import ProdukBarcodeBaseDataSchema, ProdukBarcodeReqSchema, ProdukBarcodePutSchema, ProdukBarcodeRequestListSchema
+from core.modules.produk_barcode.schema.produk_barcode_schema import ProdukBarcodeBaseDataSchema, ProdukBarcodeReqSchema, ProdukBarcodePutSchema, ProdukBarcodeRequestListSchema
 from core.modules.users.schema.users_schema import UsersBaseSchema
 from datetime import datetime
 from typing import List, Optional, Dict
@@ -16,7 +16,7 @@ from core.shared.check_data_model import (
     check_produk_barcode,
 )
 
-from core.shared.json_helpers.master.json_produk_barcode import json_produk_barcode
+from core.shared.json_helpers.json_produk_barcode import json_produk_barcode
 
 import logging
 

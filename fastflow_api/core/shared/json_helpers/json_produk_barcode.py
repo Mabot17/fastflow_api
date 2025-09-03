@@ -4,7 +4,7 @@
 # ============================================= END Noted JSON ===================================
 import os
 from sqlalchemy.orm import Session, aliased
-from core.modules.master.produk_barcode.model.produk_barcode_model import ProdukBarcodeModel
+from core.modules.produk_barcode.model.produk_barcode_model import ProdukBarcodeModel
 import barcode
 from barcode.writer import ImageWriter
 

@@ -24,7 +24,7 @@ from fastapi import (
 from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from database import get_db
-from core.modules.master.produk_barcode.crud.produk_barcode_crud import (
+from core.modules.produk_barcode.crud.produk_barcode_crud import (
     get_crud_daftar_produk_barcode,
     select_produk_barcode_by_id,
     select_produk_barcode_by_barcode,
@@ -36,7 +36,7 @@ from core.modules.master.produk_barcode.crud.produk_barcode_crud import (
 from core.modules.users.schema.users_schema import (
     UsersReqSchema,
 )
-from core.modules.master.produk_barcode.schema.produk_barcode_schema import (
+from core.modules.produk_barcode.schema.produk_barcode_schema import (
     ProdukBarcodeBaseDataSchema,
     ProdukBarcodeRequestListSchema,
     ProdukBarcodeListSchema,
