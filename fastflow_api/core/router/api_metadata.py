@@ -6,7 +6,7 @@
 
 # Title Versi 
 TITLE_API = "FASTFLOW API"
-VERSI_API = "0.1.0"
+VERSI_API = "0.1.1"
 
 # NOTED : 
 # 1. tags_metadata >> Digunakan sebagai urutan dalam dokumentasi
@@ -36,9 +36,33 @@ TAGS_METADATA_API = [
         """
     },
     {
-        "name": "Master - Produk Barcode",
+        "name": "Master - Customer",
         "description": """
-    Master - Data Produk Dengan Barcode
+    Master - Data Customer, digunakan untuk Penjualan barang
+        """
+    },
+    {
+        "name": "Master - Satuan",
+        "description": """
+    Master - Data Satuan yang digunakan untuk produk. Cth PCS, LSN, DLL
+        """
+    },
+    {
+        "name": "Master - Produk Group",
+        "description": """
+    Master - Data Produk Group yang digunakan untuk produk.
+        """
+    },
+    {
+        "name": "Master - Produk",
+        "description": """
+    Master - Data Produk yang digunakan untuk transaksi & Lain-lain
+        """
+    },
+    {
+        "name": "Master - Produk - Detail Satuan Konversi",
+        "description": """
+    Detail Dari Data Produk Satuan Konversi, Untuk Satuan Konversi Pcs ke Lsn, dll
         """
     },
     {

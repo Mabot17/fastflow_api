@@ -54,7 +54,6 @@ from core.modules.users.model.users_model import (
 
 from core.shared.check_data_model import (
     check_users,
-    check_usergroups,
     check_user_by_username,
     check_user_by_kode
 )
@@ -111,11 +110,10 @@ async def get_users(
     timestamp_data: bool = Query(False, description="Jika true, JSON akan disertakan detail timestamp."),
     user_id: int = Path(..., description="ID dari API GET `/sistem/users` (get_all_users) -> key `user_id` "),
     db: Session = Depends(get_db),
-    data_group_detail: bool = Query(False, description="Jika true, JSON akan disertakan detail group."),
     identity: UsersReqSchema = Depends(get_current_user),
 ):
     try:
-        user_data = await select_user_by_id( db, user_id=user_id, timestamp_data=timestamp_data, data_group_detail=data_group_detail)
+        user_data = await select_user_by_id( db, user_id=user_id, timestamp_data=timestamp_data)
         if not user_data:
             result = await show_not_found(http_request=http_request, status_code=404, error="Data User Tidak Ditemukan")
         else:
@@ -135,17 +133,14 @@ async def create_user(
     bt: BackgroundTasks,
     request: UsersReqSchema,
     db: Session = Depends(get_db),
-    identity: UsersReqSchema = Depends(get_current_user),
+    # identity: UsersReqSchema = Depends(get_current_user),
 ):  
     
     """
     **Catatan:** 
         
-    - `user_groups` [Int] dari API `/sistem/usergroups` -> get_all_usergroups key `group_id`\n
     - `user_name` [text] biasa, char unix (tidak boleh sama dengan user_name sebelumnya)\n
     - `user_kode` [text] biasa cth `RM` maksimal 2 char , char unix (tidak boleh sama dengan user_name sebelumnya)\n
-    - `user_karyawan` [Int] -> Karyawan ID dari API `/master/karyawan` -> get_all_karyawan key `karyawan_id`  \n
-    - `user_aktif_2fa` [Enum], Opsinya `Aktif` atau `Tidak Aktif` -> Dipakai Untuk mengaktifkan/menonaktifkan 2fa pada user terkait\n
     - `user_aktif` [Enum], Opsinya `Aktif` atau `Tidak Aktif`\n -> mengaktifkan/menonaktifkan User
     - `user_password`, sebisa mungkin unik\n
     - `user_keterangan` text biasa\n
@@ -194,11 +189,8 @@ async def update_user(
     """
     **Catatan:** 
         
-    - `user_groups` [Int] dari API `/sistem/usergroups` -> get_all_usergroups key `group_id`\n
     - `user_name` [text] biasa, char unix (tidak boleh sama dengan user_name sebelumnya)\n
     - `user_kode` [text] biasa cth `RM` maksimal 2 char , char unix (tidak boleh sama dengan user_name sebelumnya)\n
-    - `user_karyawan` [Int] -> Karyawan ID dari API `/master/karyawan` -> get_all_karyawan key `karyawan_id`  \n
-    - `user_aktif_2fa` [Enum], Opsinya `Aktif` atau `Tidak Aktif` -> Dipakai Untuk mengaktifkan/menonaktifkan 2fa pada user terkait\n
     - `user_aktif` [Enum], Opsinya `Aktif` atau `Tidak Aktif`\n -> mengaktifkan/menonaktifkan User
     - `user_password`, sebisa mungkin unik\n
     - `user_keterangan` text biasa\n
@@ -234,11 +226,8 @@ async def partial_update_user(
     """
     **Catatan:** 
         
-    - `user_groups` [Int] dari API `/sistem/usergroups` -> get_all_usergroups key `group_id`\n
     - `user_name` [text] biasa, char unix (tidak boleh sama dengan user_name sebelumnya)\n
     - `user_kode` [text] biasa cth `RM` maksimal 2 char , char unix (tidak boleh sama dengan user_name sebelumnya)\n
-    - `user_karyawan` [Int] -> Karyawan ID dari API `/master/karyawan` -> get_all_karyawan key `karyawan_id`  \n
-    - `user_aktif_2fa` [Enum], Opsinya `Aktif` atau `Tidak Aktif` -> Dipakai Untuk mengaktifkan/menonaktifkan 2fa pada user terkait\n
     - `user_aktif` [Enum], Opsinya `Aktif` atau `Tidak Aktif`\n -> mengaktifkan/menonaktifkan User
     - `user_password`, sebisa mungkin unik\n
     - `user_keterangan` text biasa\n

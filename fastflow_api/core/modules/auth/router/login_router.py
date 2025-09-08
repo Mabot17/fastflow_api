@@ -62,7 +62,7 @@ async def login(
     if Hash.verify(hashed_password=user.user_password, plain_password=request.password):
 
         data_user = await check_users(db, user_id=user.user_id)
-        result_user = await json_user(db=db, user_data_row=data_user, user_karyawan_data=True)
+        result_user = await json_user(db=db, user_data_row=data_user)
 
         # Jika OTP tidak aktif, akan langsung dikembalikan token, jika aktif perlu verifikasi dahulu
         # Generate key unix, ini JSON bisa bebas. tapi wajib cocok dengan fungsi verify_token()
@@ -104,7 +104,7 @@ async def get_me(
             return JSONResponse(content=result, status_code=result['status']['code'])
 
         # Konversi data user ke format JSON
-        result_user = await json_user(db=db, user_data_row=user_data, data_group_detail=True, user_karyawan_data=True)
+        result_user = await json_user(db=db, user_data_row=user_data)
 
         # Kembalikan response dengan data user
         content = {

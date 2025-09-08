@@ -9,7 +9,7 @@ from core.modules.users.model.users_model import UsersModel
 from .json_global import json_data_timestamp
 import logging
 
-async def json_user(db: Session, user_data_row: UsersModel, timestamp_data: bool = False, data_group_detail: bool = False, user_karyawan_data: bool = False):
+async def json_user(db: Session, user_data_row: UsersModel, timestamp_data: bool = False):
     try:
         return_users = {
             "user_id"         : user_data_row.user_id,

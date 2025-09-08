@@ -73,7 +73,7 @@ async def get_crud_list_users(db: Session, request : UsersRequestListSchema = No
             .all()
         )
         result_data = [
-            await json_user(db=db, user_data_row=row, timestamp_data=request.timestamp_data, data_group_detail=request.data_group_detail, user_karyawan_data=request.user_karyawan_data)
+            await json_user(db=db, user_data_row=row, timestamp_data=request.timestamp_data)
             for row in qr_data
         ]
 
@@ -91,7 +91,6 @@ async def select_user_by_id(
     db: Session,
     user_id: int,
     timestamp_data: bool = False,
-    data_group_detail: bool = False
 ) -> Dict:
     
     try:
@@ -112,8 +111,6 @@ async def select_user_by_id(
                 db=db,
                 user_data_row=result,
                 timestamp_data=timestamp_data,
-                data_group_detail=data_group_detail,
-                user_karyawan_data=True
             )
         else:
             return None
@@ -126,7 +123,6 @@ async def select_user_by_id(
 async def create_data_user(db: Session, user_data_create: UsersReqSchema):
     new_user = UsersModel()
     try:
-        new_user.user_groups = user_data_create.user_groups
         new_user.user_name = user_data_create.user_name
         new_user.user_kode = user_data_create.user_kode
         new_user.user_aktif = user_data_create.user_aktif
@@ -156,7 +152,6 @@ async def update_data_user(db: Session, user_data_update: UsersReqSchema, user_i
     old_user = await check_users(db, user_id=user_id)
     if old_user:
         try:
-            old_user.user_groups = user_data_update.user_groups
             old_user.user_name = user_data_update.user_name
             old_user.user_kode = user_data_update.user_kode
             old_user.user_aktif = user_data_update.user_aktif

@@ -13,9 +13,10 @@ from fastapi import APIRouter
 from core.modules.api_docs import api_docs_router, versi_router
 from core.modules.auth import login_router
 from core.modules.users.router import users_router
-from core.modules.produk_barcode.router import (
-    produk_barcode_router,
-)
+from core.modules.customer.router import customer_router
+from core.modules.satuan.router import satuan_router
+from core.modules.produk_group.router import produk_group_router
+from core.modules.produk.router import produk_router, satuan_konversi_router
 from core.modules.wablas import (
     wablas_router,
 )
@@ -37,7 +38,11 @@ apiSettings.include_router(versi_router.routerVersi)
 apiSettings.include_router(users_router.routerUser)
 
 # API Route Master
-apiSettings.include_router(produk_barcode_router.routerProdukBarcode, prefix="/master")
+apiSettings.include_router(customer_router.routerCustomer, prefix="/master")
+apiSettings.include_router(satuan_router.routerSatuan, prefix="/master")
+apiSettings.include_router(produk_group_router.routerProdukGroup, prefix="/master")
+apiSettings.include_router(produk_router.routerProduk, prefix="/master")
+apiSettings.include_router(satuan_konversi_router.routerSatuanKonversi, prefix="/master")
 
 # Start router Eksternal atau pihak ke 3
 apiSettings.include_router(wablas_router.routerWablas)

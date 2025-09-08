@@ -1,6 +1,6 @@
 [project]
 name = "fastflow_api"
-version = "0.1.0"
+version = "0.1.1"
 description = "Framework Backend custom"
 authors = [
     { name = "Abdul Rohman Masrifan", email = "masrifan26@gmail.com" }
