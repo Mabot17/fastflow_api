@@ -17,6 +17,7 @@ from core.modules.customer.router import customer_router
 from core.modules.satuan.router import satuan_router
 from core.modules.produk_group.router import produk_group_router
 from core.modules.produk.router import produk_router, satuan_konversi_router
+from core.modules.master_jual_produk.router import master_jual_produk_router, detail_jual_produk_router
 from core.modules.wablas import (
     wablas_router,
 )
@@ -43,6 +44,10 @@ apiSettings.include_router(satuan_router.routerSatuan, prefix="/master")
 apiSettings.include_router(produk_group_router.routerProdukGroup, prefix="/master")
 apiSettings.include_router(produk_router.routerProduk, prefix="/master")
 apiSettings.include_router(satuan_konversi_router.routerSatuanKonversi, prefix="/master")
+
+# API Route Master
+apiSettings.include_router(master_jual_produk_router.routerMasterJualProduk, prefix="/transaksi")
+apiSettings.include_router(detail_jual_produk_router.routerDetailMasterJualProduk, prefix="/transaksi")
 
 # Start router Eksternal atau pihak ke 3
 apiSettings.include_router(wablas_router.routerWablas)

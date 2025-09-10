@@ -12,6 +12,7 @@ from sqlalchemy.exc import IntegrityError
 from core.modules.produk.model.produk_model import ProdukModel
 from core.modules.produk_group.model.produk_group_model import ProdukGroupModel
 from core.modules.users.schema.users_schema import UsersBaseSchema
+from core.modules.master_jual_produk.model.master_jual_produk_model import MasterJualProdukModel
 
 # Import cek data model
 from core.shared.check_data_model import (
@@ -35,3 +36,25 @@ async def generate_produk_kode(db: Session, produk_group: int) -> str:
 
     return f"{prefix}{last_running_number:03d}"
 
+async def generate_master_jual_produk_nobukti(db: Session, tanggal: date, identity: UsersBaseSchema) -> str:
+    current_date = tanggal.strftime("%y%m")
+    data_user = await check_user_by_username(db, user_name=identity.user_name)
+    prefix = f"{data_user.user_kode}/{current_date}"
+
+    # Siapkan query untuk ambil nomor bukti terakhir
+    last_record = db.query(MasterJualProdukModel.jproduk_nobukti).filter(
+        func.DATE_FORMAT(MasterJualProdukModel.jproduk_tanggal, '%y%m') == current_date,
+        MasterJualProdukModel.jproduk_nobukti.like(f"{prefix}-%")
+    ).order_by(MasterJualProdukModel.jproduk_nobukti.desc()).first()
+
+
+    if last_record and last_record[0]:
+        last_number = int(last_record[0].split("-")[-1])
+    else:
+        last_number = 0
+
+    new_number = last_number + 1
+    nobukti = f"{prefix}-{new_number:04d}"
+    print(f"[DEBUG] generated_POS_nobukti = {nobukti}")
+
+    return nobukti

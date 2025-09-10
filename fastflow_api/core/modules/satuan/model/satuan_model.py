@@ -35,3 +35,5 @@ class SatuanModel(Base):
 
     # Relasi Satuan Konversi
     konversi_satuan_model_data = relationship("SatuanKonversiModel", back_populates="konversi_satuan_data")
+
+    dproduk_satuan_model_data = relationship("DetailJualProdukModel", back_populates="dproduk_satuan_data")

@@ -66,6 +66,18 @@ TAGS_METADATA_API = [
         """
     },
     {
+        "name": "Transaksi - Penjualan Produk",
+        "description": """
+    Master Transaksi Penjualan Produk
+        """
+    },
+    {
+        "name": "Transaksi - Penjualan Produk - Detail Produk",
+        "description": """
+    Detail Transaksi Penjualan Produk
+        """
+    },
+    {
         "name": "WABLAS - Tools Pengiriman Whatsapp",
         "description": """
     API Untuk Pengiriman Whatsapp ke group berupa text, image, document, File Lainnya

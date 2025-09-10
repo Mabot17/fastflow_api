@@ -323,3 +323,46 @@ async def check_satuan_konversi(
     satuan_konversi = db.query(SatuanKonversiModel).filter(criterion).first()
 
     return satuan_konversi
+
+
+async def check_master_jual_produk(
+    db: Session, jproduk_id: int, exclude_jproduk_id: int = None
+):
+    from core.modules.master_jual_produk.model.master_jual_produk_model import MasterJualProdukModel
+    
+    filter = []
+    filter.append(and_(
+        MasterJualProdukModel.jproduk_id == jproduk_id,
+        MasterJualProdukModel.deleted_by.is_(None)
+    ))
+
+    if exclude_jproduk_id:
+        filter.append(MasterJualProdukModel.jproduk_id != exclude_jproduk_id)
+    criterion = and_(*filter)
+
+    master_jual_produk = db.query(MasterJualProdukModel).filter(criterion).first()
+
+    return master_jual_produk
+
+async def check_detail_jual_produk(
+    db: Session, dproduk_id: int, jproduk_id : int = None, exclude_dproduk_id: int = None
+):
+    from core.modules.master_jual_produk.model.master_jual_produk_model import DetailJualProdukModel
+    
+    filter = []
+    filter.append(and_(
+        DetailJualProdukModel.dproduk_id == dproduk_id,
+        DetailJualProdukModel.deleted_at.is_(None),
+        DetailJualProdukModel.deleted_by.is_(None)
+    ))
+
+    if jproduk_id:
+        filter.append(DetailJualProdukModel.dproduk_master == jproduk_id)
+
+    if exclude_dproduk_id:
+        filter.append(DetailJualProdukModel.dproduk_id != exclude_dproduk_id)
+    criterion = and_(*filter)
+
+    detail_jual_produk = db.query(DetailJualProdukModel).filter(criterion).first()
+
+    return detail_jual_produk

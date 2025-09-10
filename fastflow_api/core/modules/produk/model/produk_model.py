@@ -40,3 +40,5 @@ class ProdukModel(Base):
     # Relasi Detail Dari Produk
     produk_satuan_konversi_data = relationship("SatuanKonversiModel", back_populates="produk_satuan_konversi_model_data")
     produk_group_data = relationship("ProdukGroupModel", back_populates="produk_group_model_data")
+
+    dproduk_produk_model_data = relationship("DetailJualProdukModel", back_populates="dproduk_produk_data")

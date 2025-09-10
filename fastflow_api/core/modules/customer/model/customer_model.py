@@ -32,4 +32,4 @@ class CustomerModel(Base):
     deleted_at = Column("deleted_at", DateTime)
 
     # Relasi Master Jual Produk
-    # jproduk_cust_model_data = relationship("MasterJualProdukModel", back_populates="jproduk_cust_data")
+    jproduk_cust_model_data = relationship("MasterJualProdukModel", back_populates="jproduk_cust_data")
